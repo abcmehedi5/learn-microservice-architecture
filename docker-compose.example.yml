@@ -1,0 +1,35 @@
+version: "3"
+services:
+  api_gateway:
+    build:
+      context: ./api_gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - API_GATEWAY_PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/microservices
+    depends_on:
+      - mongo
+  product_service:
+    build:
+      context: ./product_service
+      dockerfile: Dockerfile
+    environment:
+      - PRODUCT_SERVICE_PORT=3001
+      - MONGO_URI=mongodb://mongo:27017/microservices
+    depends_on:
+      - mongo
+  user_service:
+    build:
+      context: ./user_service
+      dockerfile: Dockerfile
+    environment:
+      - USER_SERVICE_PORT=3002
+      - MONGO_URI=mongodb://mongo:27017/microservices
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
