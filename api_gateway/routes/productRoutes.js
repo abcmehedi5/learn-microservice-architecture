@@ -5,7 +5,7 @@ const axios = require("axios");
 router.post("/", async (req, res) => {
   try {
     const response = await axios.post(
-      "http://localhost:3001/products",
+      "http://product_service:3001/products",
       req.body
     );
     res.status(201).send(response.data);
@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const response = await axios.get("http://localhost:3001/products");
+    const response = await axios.get("http://product_service:3001/products");
     res.send(response.data);
   } catch (err) {
     res.status(500).send("Internal Server Error");

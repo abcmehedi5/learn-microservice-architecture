@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     // const products = await Product.find();
     res.send("product data getting successfully");
   } catch (err) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Internal Server Errors" , err?.message);
   }
 });
 
